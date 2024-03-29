@@ -4,13 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId></groupId>
-  <artifactId></artifactId>
-  <version></version>
+  <groupId>me.dollarmc</groupId>
+  <artifactId>MinecraftInsaneDifficulty</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name></name>
+  <name>MinecraftInsaneDifficulty</name>
 
+  <description>A Harder minecraft difficulty</description>
   <properties>
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,6 +38,10 @@
             <goals>
               <goal>shade</goal>
             </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <outputFile>B:\Personal Projects\MinecraftInsaneDifficulty\DevWorld\plugins\MinecraftInsaneDifficulty-${project.version}.jar</outputFile>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -49,7 +54,23 @@
     </resources>
   </build>
 
-  <repositories></repositories>
+  <repositories>
+    <repository>
+      <id>spigotmc-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <repository>
+      <id>sonatype</id>
+      <url>https://oss.sonatype.org/content/groups/public/</url>
+    </repository>
+  </repositories>
 
-  <dependencies></dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>1.20.4-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 </project>

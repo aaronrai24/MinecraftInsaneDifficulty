@@ -18,7 +18,6 @@ public class CreeperEntity implements Listener {
      */
 
     public CreeperEntity(Creeper creeper) {
-
         this.creeper = creeper;
     }
 
@@ -27,7 +26,6 @@ public class CreeperEntity implements Listener {
      * This method increases the explosion radius of the Creeper.
      */
     public static void explodeCreeper(Creeper creeper) {
-
         creeper.explode();
     }
 
@@ -37,7 +35,6 @@ public class CreeperEntity implements Listener {
      * @param creeper The Creeper object
      */
     public static void setChargedCreeper(Creeper creeper) {
-
         creeper.setPowered(true);
     }
 
@@ -48,7 +45,6 @@ public class CreeperEntity implements Listener {
      * @param ticks The number of ticks for the fuse
      */
     public static void setMaxFuseTicks(Creeper creeper, int ticks) {
-
         creeper.setMaxFuseTicks(ticks);
     }
 

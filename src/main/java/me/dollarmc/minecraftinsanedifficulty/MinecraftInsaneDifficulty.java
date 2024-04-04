@@ -1,7 +1,12 @@
 package me.dollarmc.minecraftinsanedifficulty;
 
+
 import me.dollarmc.minecraftinsanedifficulty.listeners.CreatureSpawnListener;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnEntityTarget;
 import me.dollarmc.minecraftinsanedifficulty.listeners.OnFireListener;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnToolUse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -11,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MinecraftInsaneDifficulty extends JavaPlugin {
 
+    private static final Logger LOGGER = LogManager.getLogger(MinecraftInsaneDifficulty.class);
     /**
      * This method is called when the plugin is enabled.
      */
@@ -18,10 +24,12 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        System.out.println("Minecraft Insane Difficulty has started running");
+        LOGGER.info("Minecraft Insane Difficulty has started running");
         // Register the listeners
         getServer().getPluginManager().registerEvents(new OnFireListener(), this);
         getServer().getPluginManager().registerEvents(new CreatureSpawnListener(), this);
+        getServer().getPluginManager().registerEvents(new OnEntityTarget(this), this);
+        getServer().getPluginManager().registerEvents(new OnToolUse(), this);
     }
 
     /**
@@ -31,6 +39,6 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        System.out.println("Minecraft Insane Difficulty has stopped running");
+        LOGGER.info("Minecraft Insane Difficulty has stopped running");
     }
 }

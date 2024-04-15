@@ -5,13 +5,15 @@ import me.dollarmc.minecraftinsanedifficulty.entities.SpiderEntity;
 import me.dollarmc.minecraftinsanedifficulty.entities.ZombieEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bukkit.entity.Creeper;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Spider;
-import org.bukkit.entity.Zombie;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Objects;
 
 /**
  * This class listens for the CreatureSpawnEvent in the game.
@@ -44,6 +46,14 @@ public class CreatureSpawnListener implements Listener {
             Zombie zombie = createZombie(event);
             LOGGER.debug(zombie.getName() + " spawned, location: "
                     + zombie.getLocation().toString());
+        } else if (EntityType.SKELETON.equals(entity)) {
+            Skeleton skeleton = createSkeleton(event);
+            LOGGER.debug(skeleton.getName() + " spawned, location: "
+                    + skeleton.getLocation().toString());
+        } else if (EntityType.WITHER_SKELETON.equals(entity)) {
+            WitherSkeleton witherSkeleton = createWitherSkeleton(event);
+            LOGGER.debug(witherSkeleton.getName() + " spawned, location: "
+                    + witherSkeleton.getLocation().toString());
         }
     }
 
@@ -93,5 +103,31 @@ public class CreatureSpawnListener implements Listener {
         LOGGER.debug("Zombie armor given");
         zombieEntity.setZombieCustomName(zombie);
         return zombie;
+    }
+
+    /**
+     * This method creates a new Skeleton entity.
+     *
+     * @param event The CreatureSpawnEvent
+     * @return The Skeleton entity
+     */
+    public Skeleton createSkeleton(CreatureSpawnEvent event) {
+        LOGGER.debug("Skeleton entity spawned");
+        Skeleton skeleton = (Skeleton) event.getEntity();
+        ItemStack bow = new ItemStack(Material.BOW);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
+        bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
+        Objects.requireNonNull(skeleton.getEquipment()).setItemInMainHand(bow);
+        return skeleton;
+    }
+
+    public WitherSkeleton createWitherSkeleton(CreatureSpawnEvent event) {
+        LOGGER.debug("Wither Skeleton entity spawned");
+        WitherSkeleton witherSkeleton = (WitherSkeleton) event.getEntity();
+        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        sword.addEnchantment(Enchantment.KNOCKBACK, 2);
+        Objects.requireNonNull(witherSkeleton.getEquipment()).setItemInOffHand(sword);
+        Objects.requireNonNull(witherSkeleton.getEquipment()).setItemInMainHand(sword);
+        return witherSkeleton;
     }
 }

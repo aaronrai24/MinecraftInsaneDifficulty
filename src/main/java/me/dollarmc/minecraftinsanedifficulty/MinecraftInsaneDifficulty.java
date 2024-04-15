@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class MinecraftInsaneDifficulty extends JavaPlugin {
 
     private static final Logger LOGGER = LogManager.getLogger(MinecraftInsaneDifficulty.class);
+    private static MinecraftInsaneDifficulty instance;
 
     /**
      * This method is called when the plugin is enabled.
@@ -21,6 +22,7 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
         // Plugin startup logic
         LOGGER.info("Minecraft Insane Difficulty started up successfully.");
         // Register the listeners
@@ -29,6 +31,8 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnEntityTarget(this), this);
         getServer().getPluginManager().registerEvents(new OnToolUse(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerDamage(), this);
+        getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
+        getServer().getPluginManager().registerEvents(new OnPlayerMove(), this);
     }
 
     /**
@@ -39,5 +43,14 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         LOGGER.info("Minecraft Insane Difficulty terminated successfully.");
+    }
+
+    /**
+     * This method returns the instance of the MinecraftInsaneDifficulty class.
+     *
+     * @return The instance of the MinecraftInsaneDifficulty class
+     */
+    public static MinecraftInsaneDifficulty getInstance() {
+        return instance;
     }
 }

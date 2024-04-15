@@ -40,7 +40,7 @@
             </goals>
             <configuration>
               <createDependencyReducedPom>false</createDependencyReducedPom>
-              <outputFile>B:\Personal Projects\MinecraftInsaneDifficulty\DevWorld\plugins\MinecraftInsaneDifficulty-${project.version}.jar</outputFile>
+              <outputFile>DevWorld/plugins/MinecraftInsaneDifficulty-${project.version}.jar</outputFile>
             </configuration>
           </execution>
         </executions>
@@ -56,7 +56,7 @@
 
   <repositories>
     <repository>
-      <id>spigotmc-repo</id>
+      <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
     <repository>
@@ -71,6 +71,16 @@
       <artifactId>spigot-api</artifactId>
       <version>1.20.4-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.19.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.19.0</version>
     </dependency>
   </dependencies>
 </project>

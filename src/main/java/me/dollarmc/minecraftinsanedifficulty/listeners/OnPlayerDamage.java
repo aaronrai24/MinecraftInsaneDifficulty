@@ -1,0 +1,60 @@
+package me.dollarmc.minecraftinsanedifficulty.listeners;
+
+import me.dollarmc.minecraftinsanedifficulty.MinecraftInsaneDifficulty;
+import me.dollarmc.minecraftinsanedifficulty.utilities.HealthDecreaseTask;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Silverfish;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+
+/**
+ * This class listens for the EntityDamageByEntityEvent in the game.
+ */
+public class OnPlayerDamage implements Listener {
+
+    private static final Logger LOGGER = LogManager.getLogger(OnPlayerDamage.class);
+
+    /**
+     * This method listens for the EntityDamageByEntityEvent.
+     * When a player is damaged by a Silverfish, this method will spawn a new Silverfish entity.
+     *
+     * @param event The EntityDamageByEntityEvent
+     */
+
+    @EventHandler
+    public static void playerDamageSilverfish(EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            if (event.getDamager() instanceof Silverfish) {
+                LOGGER.info("{} was damaged by a Silverfish, spawning Silverfish", player.getName());
+                Silverfish silverfish = (Silverfish) event.getDamager();
+                silverfish.getWorld().spawnEntity(silverfish.getLocation(), EntityType.SILVERFISH);
+            }
+        } else {
+            LOGGER.debug("Entity {} skipping damage event.", event.getEntity().getType());
+        }
+    }
+
+    /**
+     * This method listens for the EntityDamageEvent.
+     * When a player is damaged by Lava, this method will spawn a new Silverfish entity.
+     *
+     * @param event The EntityDamageEvent
+     */
+    @EventHandler
+    public static void playerDamageLava(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            if (event.getCause() == EntityDamageEvent.DamageCause.LAVA) {
+                MinecraftInsaneDifficulty instance = MinecraftInsaneDifficulty.getInstance();
+                LOGGER.info("{} was damaged by Lava, decreasing health", player.getName());
+                new HealthDecreaseTask(player, 0.5).runTaskTimer(instance, 0, 1);
+            }
+        }
+    }
+}

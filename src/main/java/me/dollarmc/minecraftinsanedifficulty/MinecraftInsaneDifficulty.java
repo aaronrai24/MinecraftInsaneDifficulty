@@ -33,6 +33,7 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnPlayerDamage(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerMove(), this);
+        getServer().getPluginManager().registerEvents(new OnBlockBreak(), this);
     }
 
     /**

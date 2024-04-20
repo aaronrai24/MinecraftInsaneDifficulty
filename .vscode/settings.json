@@ -1,4 +1,5 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.checkstyle.configuration": "${workspaceFolder}/src/main/resources/google_checks.xml"
+    "java.checkstyle.configuration": "${workspaceFolder}/src/main/resources/google_checks.xml",
+    "java.checkstyle.version": "10.15.0"
 }

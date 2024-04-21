@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
  */
 public class CreeperEntity implements Listener {
 
+    @SuppressWarnings("unused")
     private final Creeper creeper;
 
     /**
@@ -20,7 +21,6 @@ public class CreeperEntity implements Listener {
     public CreeperEntity(Creeper creeper) {
         this.creeper = creeper;
     }
-
 
     /**
      * This method increases the explosion radius of the Creeper.
@@ -42,7 +42,7 @@ public class CreeperEntity implements Listener {
      * This method sets the fuse ticks of the Creeper.
      *
      * @param creeper The Creeper object
-     * @param ticks The number of ticks for the fuse
+     * @param ticks   The number of ticks for the fuse
      */
     public static void setMaxFuseTicks(Creeper creeper, int ticks) {
         creeper.setMaxFuseTicks(ticks);
@@ -52,7 +52,7 @@ public class CreeperEntity implements Listener {
      * This method increases the explosion radius of the Creeper.
      *
      * @param creeper The Creeper object
-     * @param radius The explosion radius
+     * @param radius  The explosion radius
      */
     public static void increaseExplosionRadius(Creeper creeper, int radius) {
         creeper.setExplosionRadius(radius);

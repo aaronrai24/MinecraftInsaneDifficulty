@@ -4,13 +4,17 @@ import me.dollarmc.minecraftinsanedifficulty.MinecraftInsaneDifficulty;
 import me.dollarmc.minecraftinsanedifficulty.utilities.HealthDecreaseTask;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Silverfish;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  * This class listens for the EntityDamageByEntityEvent in the game.
@@ -54,6 +58,23 @@ public class OnPlayerDamage implements Listener {
                 MinecraftInsaneDifficulty instance = MinecraftInsaneDifficulty.getInstance();
                 LOGGER.info("{} was damaged by Lava, decreasing health", player.getName());
                 new HealthDecreaseTask(player, 0.5).runTaskTimer(instance, 0, 1);
+            }
+        }
+    }
+
+    /**
+     * This method listens for the EntityDamageByBlockEvent.
+     * When a player is damaged by a Cactus, this method will apply a Poison effect to the player.
+     *
+     * @param event The EntityDamageByBlockEvent
+     */
+    @EventHandler
+    public static void playerDamageCactus(EntityDamageByBlockEvent event) {
+        if (event.getDamager().getType() == Material.CACTUS) {
+            if (event.getEntity() instanceof Player) {
+                Player player = (Player) event.getEntity();
+                LOGGER.info("{} was damaged by a Cactus, applying Poison effect", player.getName());
+                player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 500, 1));
             }
         }
     }

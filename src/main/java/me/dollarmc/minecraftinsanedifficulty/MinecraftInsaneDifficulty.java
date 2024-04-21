@@ -1,7 +1,13 @@
 package me.dollarmc.minecraftinsanedifficulty;
 
-
-import me.dollarmc.minecraftinsanedifficulty.listeners.*;
+import me.dollarmc.minecraftinsanedifficulty.listeners.CreatureSpawnListener;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnBlockBreak;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnEntityTarget;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnFireListener;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnPlayerDamage;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnPlayerDeath;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnPlayerMove;
+import me.dollarmc.minecraftinsanedifficulty.listeners.OnToolUse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -37,19 +43,9 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
     }
 
     /**
-     * This method is called when the plugin is disabled.
-     */
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-        LOGGER.info("Minecraft Insane Difficulty terminated successfully.");
-    }
-
-    /**
-     * This method returns the instance of the MinecraftInsaneDifficulty class.
+     * Returns the instance of the MinecraftInsaneDifficulty class.
      *
-     * @return The instance of the MinecraftInsaneDifficulty class
+     * @return The instance of the MinecraftInsaneDifficulty class.
      */
     public static MinecraftInsaneDifficulty getInstance() {
         return instance;

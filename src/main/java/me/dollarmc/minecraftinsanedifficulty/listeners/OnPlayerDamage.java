@@ -73,7 +73,8 @@ public class OnPlayerDamage implements Listener {
         if (event.getDamager().getType() == Material.CACTUS) {
             if (event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();
-                player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 1));
+                LOGGER.info("{} was damaged by a Cactus, applying Poison effect", player.getName());
+                player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 500, 1));
             }
         }
     }

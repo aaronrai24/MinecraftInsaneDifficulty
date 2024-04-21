@@ -40,7 +40,7 @@
             </goals>
             <configuration>
               <createDependencyReducedPom>false</createDependencyReducedPom>
-              <outputFile>DevWorld/plugins/MinecraftInsaneDifficulty-${project.version}.jar</outputFile>
+              <outputFile>${project.basedir}/devworld/plugins/MinecraftInsaneDifficulty-${project.version}.jar</outputFile>
             </configuration>
           </execution>
         </executions>

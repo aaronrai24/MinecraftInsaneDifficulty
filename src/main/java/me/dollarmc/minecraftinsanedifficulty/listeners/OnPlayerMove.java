@@ -1,25 +1,39 @@
 package me.dollarmc.minecraftinsanedifficulty.listeners;
 
+import java.util.Objects;
 import me.dollarmc.minecraftinsanedifficulty.MinecraftInsaneDifficulty;
 import me.dollarmc.minecraftinsanedifficulty.utilities.BreathDecreaseTask;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
-import java.util.Objects;
-
+/**
+ * This class listens for when a player moves.
+ */
 public class OnPlayerMove implements Listener {
 
     private static final Logger LOGGER = LogManager.getLogger(OnPlayerMove.class);
 
+    /**
+     * This method is called when a player moves.
+     *
+     * @param event The PlayerMoveEvent object
+     */
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        Material blockType = Objects.requireNonNull(event.getTo()).getBlock().getType();
+        // Material blockType = Objects.requireNonNull(event.getTo()).getBlock().getType();
+        Location loc = Objects.requireNonNull(event.getTo()).clone();
+        loc.setY(loc.getY() - 1);
+        Material blockType = loc.getBlock().getType();
         if (blockType == Material.WATER) {
             if (player.getRemainingAir() == 270) {
                 LOGGER.info("{} is in water, decreasing breath", player.getName());
@@ -27,6 +41,21 @@ public class OnPlayerMove implements Listener {
                 new BreathDecreaseTask(player, 7, 0.5).runTaskTimer(
                         instance, 0, 1);
             }
+        } else if (blockType == Material.ICE) {
+            LOGGER.info("{} is on ice, increasing y velocity by 2", player.getName());
+            player.setVelocity(new Vector(0, 0.75, 0));
+        } else if (blockType == Material.PACKED_ICE) {
+            LOGGER.info("{} is on packed ice, increasing y velocity by 3", player.getName());
+            player.setVelocity(new Vector(0, 1.75, 0));
+        } else if (blockType == Material.BLUE_ICE) {
+            LOGGER.info("{} is on blue ice, increasing y velocity by 4", player.getName());
+            player.setVelocity(new Vector(0, 3, 0));
+        } else if (blockType == Material.BEDROCK) {
+            LOGGER.info("{} is on bedrock, applying blindness effect", player.getName());
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 300, 1));
+        } else if (blockType == Material.REDSTONE_ORE) {
+            LOGGER.info("{} is on redstone ore, applying slowness effect", player.getName());
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 150, 1));
         }
     }
 }

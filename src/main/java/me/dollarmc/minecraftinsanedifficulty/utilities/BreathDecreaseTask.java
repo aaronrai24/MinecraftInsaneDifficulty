@@ -1,7 +1,6 @@
 package me.dollarmc.minecraftinsanedifficulty.utilities;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
@@ -13,6 +12,15 @@ public class BreathDecreaseTask extends BukkitRunnable {
     private final int decreaseAmount;
     private final double healthDecreaseAmount;
 
+    /**
+     * This constructor creates a new BreathDecreaseTask object.
+     *
+     * @param player               the player whose breath will be decreased
+     * @param decreaseAmount       the amount by which the player's breath will be
+     *                             decreased
+     * @param healthDecreaseAmount the amount by which the player's health will be
+     *                             decreased
+     */
     public BreathDecreaseTask(Player player, int decreaseAmount, double healthDecreaseAmount) {
         this.player = player;
         this.decreaseAmount = decreaseAmount;

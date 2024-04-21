@@ -1,5 +1,6 @@
 package me.dollarmc.minecraftinsanedifficulty.listeners;
 
+import java.util.Objects;
 import me.dollarmc.minecraftinsanedifficulty.entities.CreeperEntity;
 import me.dollarmc.minecraftinsanedifficulty.entities.SpiderEntity;
 import me.dollarmc.minecraftinsanedifficulty.entities.ZombieEntity;
@@ -7,13 +8,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Creeper;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Spider;
+import org.bukkit.entity.WitherSkeleton;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Objects;
 
 /**
  * This class listens for the CreatureSpawnEvent in the game.
@@ -121,6 +125,12 @@ public class CreatureSpawnListener implements Listener {
         return skeleton;
     }
 
+    /**
+     * This method creates a new Wither Skeleton entity.
+     *
+     * @param event The CreatureSpawnEvent
+     * @return The Wither Skeleton entity
+     */
     public WitherSkeleton createWitherSkeleton(CreatureSpawnEvent event) {
         LOGGER.debug("Wither Skeleton entity spawned");
         WitherSkeleton witherSkeleton = (WitherSkeleton) event.getEntity();

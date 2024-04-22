@@ -1,5 +1,7 @@
 package me.dollarmc.minecraftinsanedifficulty.listeners;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import me.dollarmc.minecraftinsanedifficulty.MinecraftInsaneDifficulty;
 import me.dollarmc.minecraftinsanedifficulty.utilities.BreathDecreaseTask;
@@ -13,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 /**
@@ -21,6 +24,7 @@ import org.bukkit.util.Vector;
 public class OnPlayerMove implements Listener {
 
     private static final Logger LOGGER = LogManager.getLogger(OnPlayerMove.class);
+    private Map<Player, BukkitTask> breathDecreaseTasks = new HashMap<>();
 
     /**
      * This method is called when a player moves.
@@ -30,7 +34,6 @@ public class OnPlayerMove implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        // Material blockType = Objects.requireNonNull(event.getTo()).getBlock().getType();
         Location loc = Objects.requireNonNull(event.getTo()).clone();
         loc.setY(loc.getY() - 1);
         Material blockType = loc.getBlock().getType();
@@ -38,8 +41,9 @@ public class OnPlayerMove implements Listener {
             if (player.getRemainingAir() == 270) {
                 LOGGER.info("{} is in water, decreasing breath", player.getName());
                 MinecraftInsaneDifficulty instance = MinecraftInsaneDifficulty.getInstance();
-                new BreathDecreaseTask(player, 7, 0.5).runTaskTimer(
+                BukkitTask task = new BreathDecreaseTask(player, 5, 0.5).runTaskTimer(
                         instance, 0, 1);
+                breathDecreaseTasks.put(player, task);
             }
         } else if (blockType == Material.ICE) {
             LOGGER.info("{} is on ice, increasing y velocity by 2", player.getName());
@@ -56,6 +60,13 @@ public class OnPlayerMove implements Listener {
         } else if (blockType == Material.REDSTONE_ORE) {
             LOGGER.info("{} is on redstone ore, applying slowness effect", player.getName());
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 150, 1));
+        } else {
+            BukkitTask task = breathDecreaseTasks.get(player);
+            if (task != null) {
+                LOGGER.info("{} is no longer in water, cancelling breath decrease task", player.getName());
+                task.cancel();
+                breathDecreaseTasks.remove(player);
+            }
         }
     }
 }

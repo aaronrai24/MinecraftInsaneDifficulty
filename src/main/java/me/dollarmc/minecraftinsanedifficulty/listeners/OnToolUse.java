@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class OnToolUse implements Listener {
 
     private static final Logger LOGGER = LogManager.getLogger(OnToolUse.class);
+
     /**
      * This method listens for the PlayerItemDamageEvent.
      * When a player uses a tool, this method has a 5% chance to break the tool.
@@ -28,8 +29,8 @@ public class OnToolUse implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         Random random = new Random();
-        int chance = random.nextInt(100);
-        if (chance < 5) {
+        int chance = random.nextInt(200);
+        if (chance < 1) {
             LOGGER.info("Chance is: " + chance + ", breaking tool");
             item.setAmount((short) 0);
         }

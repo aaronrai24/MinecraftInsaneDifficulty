@@ -1,7 +1,7 @@
 package me.dollarmc.minecraftinsanedifficulty.listeners;
 
 import java.util.Random;
-
+import me.dollarmc.minecraftinsanedifficulty.MinecraftInsaneDifficulty;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EnderDragon;
@@ -10,8 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import me.dollarmc.minecraftinsanedifficulty.MinecraftInsaneDifficulty;
 
 /**
  * This class listens for the EntityDeathEvent.

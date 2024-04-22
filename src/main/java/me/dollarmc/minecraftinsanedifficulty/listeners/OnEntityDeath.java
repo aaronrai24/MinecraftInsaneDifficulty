@@ -36,7 +36,7 @@ public class OnEntityDeath implements Listener {
                 EnderDragon enderDragon = (EnderDragon) event.getEntity();
                 Location location = enderDragon.getLocation();
                 World world = enderDragon.getWorld();
-                MinecraftInsaneDifficulty instance = MinecraftInsaneDifficulty.getInstance()
+                MinecraftInsaneDifficulty instance = MinecraftInsaneDifficulty.getInstance();
                 new BukkitRunnable() {
                     @Override
                     public void run() {

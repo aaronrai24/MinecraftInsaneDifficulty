@@ -25,9 +25,9 @@ public class OnBlockBreak implements Listener {
 
     private static class SpawnInfo {
         EntityType type;
-        int chance;
+        float chance;
 
-        SpawnInfo(EntityType type, int chance) {
+        SpawnInfo(EntityType type, float chance) {
             this.type = type;
             this.chance = chance;
         }
@@ -37,49 +37,49 @@ public class OnBlockBreak implements Listener {
 
     static {
         spawnMap.put(Material.ANCIENT_DEBRIS, Arrays.asList(
-                new SpawnInfo(EntityType.WARDEN, 30)));
+                new SpawnInfo(EntityType.WARDEN, 0.01f)));
         spawnMap.put(Material.DIAMOND_ORE, Arrays.asList(
-                new SpawnInfo(EntityType.EVOKER, 5),
-                new SpawnInfo(EntityType.WITHER_SKELETON, 3),
-                new SpawnInfo(EntityType.WITHER, 1)));
+                new SpawnInfo(EntityType.EVOKER, 0.005f),
+                new SpawnInfo(EntityType.WITHER_SKELETON, 0.003f),
+                new SpawnInfo(EntityType.WITHER, 0.001f)));
         spawnMap.put(Material.EMERALD_ORE, Arrays.asList(
-                new SpawnInfo(EntityType.ENDERMAN, 5),
-                new SpawnInfo(EntityType.SHULKER, 3),
-                new SpawnInfo(EntityType.ENDER_DRAGON, 1)));
+                new SpawnInfo(EntityType.ENDERMAN, 0.005f),
+                new SpawnInfo(EntityType.SHULKER, 0.003f),
+                new SpawnInfo(EntityType.ENDER_DRAGON, 0.001f)));
         spawnMap.put(Material.GOLD_ORE, Arrays.asList(
-                new SpawnInfo(EntityType.BLAZE, 5),
-                new SpawnInfo(EntityType.MAGMA_CUBE, 3),
-                new SpawnInfo(EntityType.GHAST, 1)));
+                new SpawnInfo(EntityType.BLAZE, 0.005f),
+                new SpawnInfo(EntityType.MAGMA_CUBE, 0.003f),
+                new SpawnInfo(EntityType.GHAST, 0.001f)));
         spawnMap.put(Material.IRON_ORE, Arrays.asList(
-                new SpawnInfo(EntityType.ZOMBIE, 5),
-                new SpawnInfo(EntityType.SKELETON, 3),
-                new SpawnInfo(EntityType.CREEPER, 1)));
+                new SpawnInfo(EntityType.ZOMBIE, 0.005f),
+                new SpawnInfo(EntityType.SKELETON, 0.003f),
+                new SpawnInfo(EntityType.CREEPER, 0.001f)));
         spawnMap.put(Material.LAPIS_ORE, Arrays.asList(
-                new SpawnInfo(EntityType.WITCH, 5),
-                new SpawnInfo(EntityType.VINDICATOR, 3),
-                new SpawnInfo(EntityType.PILLAGER, 1)));
+                new SpawnInfo(EntityType.WITCH, 0.005f),
+                new SpawnInfo(EntityType.VINDICATOR, 0.003f),
+                new SpawnInfo(EntityType.PILLAGER, 0.001f)));
         spawnMap.put(Material.REDSTONE_ORE, Arrays.asList(
-                new SpawnInfo(EntityType.SPIDER, 5),
-                new SpawnInfo(EntityType.CAVE_SPIDER, 3),
-                new SpawnInfo(EntityType.SILVERFISH, 1)));
+                new SpawnInfo(EntityType.SPIDER, 0.005f),
+                new SpawnInfo(EntityType.CAVE_SPIDER, 0.003f),
+                new SpawnInfo(EntityType.SILVERFISH, 0.001f)));
         spawnMap.put(Material.COAL_ORE, Arrays.asList(
-                new SpawnInfo(EntityType.PHANTOM, 5),
-                new SpawnInfo(EntityType.VEX, 3),
-                new SpawnInfo(EntityType.STRAY, 1)));
+                new SpawnInfo(EntityType.PHANTOM, 0.005f),
+                new SpawnInfo(EntityType.VEX, 0.003f),
+                new SpawnInfo(EntityType.STRAY, 0.001f)));
         spawnMap.put(Material.OAK_LOG, Arrays.asList(
-                new SpawnInfo(EntityType.SILVERFISH, 3)));
+                new SpawnInfo(EntityType.SILVERFISH, 0.003f)));
         spawnMap.put(Material.BIRCH_LOG, Arrays.asList(
-                new SpawnInfo(EntityType.SILVERFISH, 3)));
+                new SpawnInfo(EntityType.SILVERFISH, 0.003f)));
         spawnMap.put(Material.SPRUCE_LOG, Arrays.asList(
-                new SpawnInfo(EntityType.SILVERFISH, 3)));
+                new SpawnInfo(EntityType.SILVERFISH, 0.003f)));
         spawnMap.put(Material.JUNGLE_LOG, Arrays.asList(
-                new SpawnInfo(EntityType.SILVERFISH, 3)));
+                new SpawnInfo(EntityType.SILVERFISH, 0.003f)));
         spawnMap.put(Material.ACACIA_LOG, Arrays.asList(
-                new SpawnInfo(EntityType.SILVERFISH, 3)));
+                new SpawnInfo(EntityType.SILVERFISH, 0.003f)));
         spawnMap.put(Material.DARK_OAK_LOG, Arrays.asList(
-                new SpawnInfo(EntityType.SILVERFISH, 3)));
+                new SpawnInfo(EntityType.SILVERFISH, 0.003f)));
         spawnMap.put(Material.JUNGLE_LOG, Arrays.asList(
-                new SpawnInfo(EntityType.SILVERFISH, 3)));
+                new SpawnInfo(EntityType.SILVERFISH, 0.003f)));
     }
 
     /**
@@ -95,14 +95,14 @@ public class OnBlockBreak implements Listener {
         Location playerLocation = event.getPlayer().getLocation();
         Player player = event.getPlayer();
         Random random = new Random();
-        int chance = random.nextInt(50);
+        float chance = random.nextFloat();
         LOGGER.debug("{} broke a {} block", player.getName(), material);
         if (spawns != null) {
             for (SpawnInfo spawn : spawns) {
                 if (chance < spawn.chance) {
                     LOGGER.info("Random number {} is less than spawn chance {}", chance,
                             spawn.chance);
-                    int spawnAmount = random.nextInt(5);
+                    int spawnAmount = random.nextInt(2);
                     for (int i = 0; i < spawnAmount; i++) {
                         LOGGER.info("Spawning {} {} at {}", spawnAmount, spawn.type,
                                 playerLocation);

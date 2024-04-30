@@ -62,7 +62,7 @@ public class OnEntityTarget implements Listener {
                         this.cancel();
                     }
                 }
-            }.runTaskTimer(plugin, 0L, 1L);
+            }.runTaskTimer(plugin, 20L, 1L);
         }
     }
 }

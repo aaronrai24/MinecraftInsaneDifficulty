@@ -119,7 +119,6 @@ public class CreatureSpawnListener implements Listener {
         LOGGER.debug("Skeleton entity spawned");
         Skeleton skeleton = (Skeleton) event.getEntity();
         ItemStack bow = new ItemStack(Material.BOW);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
         Objects.requireNonNull(skeleton.getEquipment()).setItemInMainHand(bow);
         return skeleton;

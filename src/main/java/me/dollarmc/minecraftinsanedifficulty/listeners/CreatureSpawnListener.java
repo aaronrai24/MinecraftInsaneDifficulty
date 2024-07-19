@@ -21,16 +21,17 @@ import org.bukkit.inventory.ItemStack;
 
 /**
  * This class listens for the CreatureSpawnEvent in the game.
- * When a creature spawns, this class will increase the movement speed of the Spider entity.
+ * When a creature spawns, this class will increase the movement speed of the
+ * Spider entity.
  */
 public class CreatureSpawnListener implements Listener {
 
     private static final Logger LOGGER = LogManager.getLogger(CreatureSpawnListener.class);
 
-
     /**
      * This method listens for the CreatureSpawnEvent.
-     * When a creature spawns, this method will create a new entity based on the type of creature.
+     * When a creature spawns, this method will create a new entity based on the
+     * type of creature.
      *
      * @param event The CreatureSpawnEvent
      */
@@ -119,7 +120,7 @@ public class CreatureSpawnListener implements Listener {
         LOGGER.debug("Skeleton entity spawned");
         Skeleton skeleton = (Skeleton) event.getEntity();
         ItemStack bow = new ItemStack(Material.BOW);
-        bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
+        bow.addEnchantment(Enchantment.FLAME, 1);
         Objects.requireNonNull(skeleton.getEquipment()).setItemInMainHand(bow);
         return skeleton;
     }

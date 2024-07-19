@@ -1,6 +1,3 @@
-# Initial Release v1.0.0
+# Release v1.0.1
 
-- Mobs like skeletons, zombies, and creepers have been buffed.
-- Added random chance for events like taking damage, walking on a type of block, mining a block
-- Buffed lava, water, fire, and ice
-- Added death chest and death position notification when a player dies
+- Updated plugin to support Minecraft 1.21

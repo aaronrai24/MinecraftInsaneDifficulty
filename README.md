@@ -28,7 +28,7 @@ If you would like to contribute to this project please fork the repository and s
 - Maven is used for dependency management and building the project.
 - Spigot is used for the Minecraft server API. JavaDocs can be found [here](https://hub.spigotmc.org/javadocs/spigot/overview-summary.html)
 - Java version 21 is used for this project.
-- Minecraft version 1.20.4
+- Minecraft version 1.21
 
 ## LICENSE
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

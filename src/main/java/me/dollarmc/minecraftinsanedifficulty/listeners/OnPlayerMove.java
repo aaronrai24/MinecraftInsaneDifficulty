@@ -37,7 +37,9 @@ public class OnPlayerMove implements Listener {
         Location loc = Objects.requireNonNull(event.getTo()).clone();
         loc.setY(loc.getY() - 1);
         Material blockType = loc.getBlock().getType();
-        if (blockType == Material.WATER) {
+        Location headLoc = player.getLocation().add(0, 1, 0);
+        Material headBlockType = headLoc.getBlock().getType();
+        if (headBlockType == Material.WATER) {
             if (player.getRemainingAir() == 270) {
                 LOGGER.info("{} is in water, decreasing breath", player.getName());
                 MinecraftInsaneDifficulty instance = MinecraftInsaneDifficulty.getInstance();

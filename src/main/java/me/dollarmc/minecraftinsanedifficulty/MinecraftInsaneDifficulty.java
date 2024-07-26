@@ -1,5 +1,6 @@
 package me.dollarmc.minecraftinsanedifficulty;
 
+import me.dollarmc.minecraftinsanedifficulty.commands.DoOverCommand;
 import me.dollarmc.minecraftinsanedifficulty.listeners.CreatureSpawnListener;
 import me.dollarmc.minecraftinsanedifficulty.listeners.OnBlockBreak;
 import me.dollarmc.minecraftinsanedifficulty.listeners.OnEntityTarget;
@@ -31,7 +32,7 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
         instance = this;
         // Plugin startup logic
         LOGGER.info("Minecraft Insane Difficulty started up successfully.");
-        // Register the listeners
+        // Register the Events
         getServer().getPluginManager().registerEvents(new OnFireListener(), this);
         getServer().getPluginManager().registerEvents(new CreatureSpawnListener(), this);
         getServer().getPluginManager().registerEvents(new OnEntityTarget(this), this);
@@ -40,6 +41,17 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnPlayerDeath(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerMove(), this);
         getServer().getPluginManager().registerEvents(new OnBlockBreak(), this);
+        // Registser the Commands
+        getCommand("doover").setExecutor(new DoOverCommand(instance));
+    }
+
+    /**
+     * This method is called when the plugin is disabled.
+     */
+    @Override
+    public void onDisable() {
+        // Plugin shutdown logic
+        LOGGER.info("Minecraft Insane Difficulty shut down successfully.");
     }
 
     /**

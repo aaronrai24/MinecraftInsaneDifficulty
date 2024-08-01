@@ -9,3 +9,9 @@ commands:
   doover:
     description: Start the game completely over
     usage: /<command>
+  reportbug:
+    description: Report a bug to the developers
+    usage: /<command> <title> <description>
+  featurerequest:
+    description: Request a feature to be added
+    usage: /<command> <title> <description>

@@ -1,6 +1,8 @@
 package me.dollarmc.minecraftinsanedifficulty;
 
+import me.dollarmc.minecraftinsanedifficulty.commands.BugReport;
 import me.dollarmc.minecraftinsanedifficulty.commands.DoOverCommand;
+import me.dollarmc.minecraftinsanedifficulty.commands.FeatureRequest;
 import me.dollarmc.minecraftinsanedifficulty.listeners.CreatureSpawnListener;
 import me.dollarmc.minecraftinsanedifficulty.listeners.OnBlockBreak;
 import me.dollarmc.minecraftinsanedifficulty.listeners.OnEntityTarget;
@@ -43,6 +45,8 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnBlockBreak(), this);
         // Registser the Commands
         getCommand("doover").setExecutor(new DoOverCommand(instance));
+        getCommand("reportBug").setExecutor(new BugReport());
+        getCommand("featureRequest").setExecutor(new FeatureRequest());
     }
 
     /**

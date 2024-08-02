@@ -6,7 +6,7 @@
 
   <groupId>me.dollarmc</groupId>
   <artifactId>MinecraftInsaneDifficulty</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <packaging>jar</packaging>
 
   <name>MinecraftInsaneDifficulty</name>
@@ -66,6 +66,11 @@
   </repositories>
 
   <dependencies>
+    <dependency>
+      <groupId>org.eclipse.mylyn.github</groupId>
+      <artifactId>org.eclipse.egit.github.core</artifactId>
+      <version>2.1.5</version>
+    </dependency>
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>

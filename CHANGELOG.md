@@ -1,5 +1,5 @@
-# Release v1.0.1
+# v1.0.2
 
-- Updated plugin to support Minecraft 1.21
-- Fixed an issue where breath decrease task was not being cancelled when player was not in water
-- Fixed a `ItemStack` cannot be NULL when saving player items to death chest
+- Added `/doover` command to reset the current game.
+- Added `/reportbug` command to report bugs directly to github issues.
+- Added `/featurerequest` command to request features directly to github issues.

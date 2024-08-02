@@ -5,3 +5,13 @@ api-version: '1.20'
 prefix: dollar
 authors: [Cash]
 description: An plugin difficulty that goes above "Hard"
+commands:
+  doover:
+    description: Start the game completely over
+    usage: /<command>
+  reportbug:
+    description: Report a bug to the developers
+    usage: /<command> <title> <description>
+  featurerequest:
+    description: Request a feature to be added
+    usage: /<command> <title> <description>

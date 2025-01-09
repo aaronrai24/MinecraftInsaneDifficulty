@@ -1,6 +1,10 @@
 package me.dollarmc.minecraftinsanedifficulty.listeners;
 
 import java.util.Objects;
+import java.util.Random;
+
+import me.dollarmc.minecraftinsanedifficulty.MinecraftInsaneDifficulty;
+import me.dollarmc.minecraftinsanedifficulty.entities.BomberEntity;
 import me.dollarmc.minecraftinsanedifficulty.entities.CreeperEntity;
 import me.dollarmc.minecraftinsanedifficulty.entities.SpiderEntity;
 import me.dollarmc.minecraftinsanedifficulty.entities.ZombieEntity;
@@ -27,6 +31,11 @@ import org.bukkit.inventory.ItemStack;
 public class CreatureSpawnListener implements Listener {
 
     private static final Logger LOGGER = LogManager.getLogger(CreatureSpawnListener.class);
+    private final MinecraftInsaneDifficulty plugin;
+
+    public CreatureSpawnListener(MinecraftInsaneDifficulty plugin) {
+        this.plugin = plugin;
+    }
 
     /**
      * This method listens for the CreatureSpawnEvent.
@@ -41,24 +50,14 @@ public class CreatureSpawnListener implements Listener {
         EntityType entity = event.getEntityType();
         if (EntityType.SPIDER.equals(entity)) {
             Spider spider = createSpider(event);
-            LOGGER.debug(spider.getName() + " spawned, location: "
-                    + spider.getLocation().toString());
         } else if (EntityType.CREEPER.equals(entity)) {
             Creeper creeper = createCreeper(event);
-            LOGGER.debug(creeper.getName() + " spawned, location: "
-                    + creeper.getLocation().toString());
         } else if (EntityType.ZOMBIE.equals(entity)) {
             Zombie zombie = createZombie(event);
-            LOGGER.debug(zombie.getName() + " spawned, location: "
-                    + zombie.getLocation().toString());
         } else if (EntityType.SKELETON.equals(entity)) {
             Skeleton skeleton = createSkeleton(event);
-            LOGGER.debug(skeleton.getName() + " spawned, location: "
-                    + skeleton.getLocation().toString());
         } else if (EntityType.WITHER_SKELETON.equals(entity)) {
             WitherSkeleton witherSkeleton = createWitherSkeleton(event);
-            LOGGER.debug(witherSkeleton.getName() + " spawned, location: "
-                    + witherSkeleton.getLocation().toString());
         }
     }
 
@@ -100,6 +99,16 @@ public class CreatureSpawnListener implements Listener {
     public Zombie createZombie(CreatureSpawnEvent event) {
         LOGGER.debug("Zombie entity spawned");
         Zombie zombie = (Zombie) event.getEntity();
+
+        // Add a random chance to create a bomber
+        Random rand = new Random();
+        if (rand.nextInt(100) < 100) {
+            LOGGER.debug("Creating a Bomber entity");
+            BomberEntity bomberEntity = new BomberEntity(zombie, plugin);
+            bomberEntity.createBomber();
+            return zombie;
+        }
+
         ZombieEntity zombieEntity = new ZombieEntity(zombie);
         zombieEntity.setBabyZombie();
         LOGGER.debug("Zombie entity set to be a baby");

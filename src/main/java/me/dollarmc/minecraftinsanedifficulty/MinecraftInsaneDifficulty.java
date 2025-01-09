@@ -36,7 +36,7 @@ public final class MinecraftInsaneDifficulty extends JavaPlugin {
         LOGGER.info("Minecraft Insane Difficulty started up successfully.");
         // Register the Events
         getServer().getPluginManager().registerEvents(new OnFireListener(), this);
-        getServer().getPluginManager().registerEvents(new CreatureSpawnListener(), this);
+        getServer().getPluginManager().registerEvents(new CreatureSpawnListener(this), this);
         getServer().getPluginManager().registerEvents(new OnEntityTarget(this), this);
         getServer().getPluginManager().registerEvents(new OnToolUse(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerDamage(), this);

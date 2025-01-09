@@ -107,4 +107,8 @@ public class ZombieEntity {
         int index = random.nextInt(ZOMBIE_NAMES.size());
         zombie.setCustomName(ZOMBIE_NAMES.get(index));
     }
+
+    public void setZombieHeath(Zombie zombie, double health) {
+        zombie.setHealth(health);
+    }
 }
